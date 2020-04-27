@@ -60,7 +60,7 @@ python2 版本 https://github.com/jiesutd/YEDDA
 
 - 在标注程序界面的右侧，设置快捷键，如图：
 
-- ![image-20200422122146378](./pic/image-20200422122146378.png)
+- ![image-20200422122146378](pic/image-20200422122146378.png)
 
 - 点击 `ReMap` 按钮，保存快捷键设置
 
@@ -68,7 +68,7 @@ python2 版本 https://github.com/jiesutd/YEDDA
 
 - 选中文本，然后使用设置好的快捷键进行标注，标注格式形如 `[@the text span＃Location*]`
 
-  ![image-20200422122327711](./pic/image-20200422122327711.png)
+  ![image-20200422122327711](pic/image-20200422122327711.png)
 
 - 通过 `RMOn` 和 `RMOff` 按钮，可以开启或关闭智能推荐
 
@@ -120,7 +120,7 @@ python2 版本 https://github.com/jiesutd/YEDDA
 
 分块的文章内容 如part1.txt表示文章原文  part1.txt.anns 表示第一部分标注结果
 
-![image-20200420205528684](./pic/image-20200420205528684.png)
+![image-20200420205528684](pic/image-20200420205528684.png)
 
 
 

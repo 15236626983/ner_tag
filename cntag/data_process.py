@@ -21,10 +21,11 @@ def tmp_to_file_part(file_num, part_num):
 def get_all_tagged_tittle():
     with open(f'tagged.txt', 'w', encoding="utf-8") as f:
         for file in paths.list_files('.', validExts=('.json',)):
-            j = json.load(open(file, 'r', encoding='utf-8'))
-            f.write(j['name'] + '\n')
-    pass
-
+            try:
+                j = json.load(open(file, 'r', encoding='utf-8'))
+                f.write(j['name'] + '\n')
+            except Exception:
+                print(file)
 
 # 检测标题是否冗余,冗余返回false
 def get_tagged_tittle():
@@ -36,19 +37,21 @@ def get_tagged_tittle():
 
 if __name__ == '__main__':
     get_all_tagged_tittle()
-    _id = 2016 # 文章id
+    _id = 2030 # 文章id
     part_num = 1  # 文章部分号
     tmp_to_file_part(_id, part_num)
     if (part_num == 1):
-        name = '人工智能如何影响军事发展？'  # 标题
+        name = '人工智能发展趋势1'  # 标题
         lines=get_tagged_tittle()
         if name in lines:
             exit(0) #重复直接退出，不会生成json文件
-        publisher = '每日军榜'
-        url = 'https://new.qq.com/omn/20180421/20180421G04MSM.html'
+        publisher = '上海情报服务平台'
+        url = 'http://www.istis.sh.cn/list/list.aspx?id=12080'
         keywords = ''
-        date = '20180421'  # 日期
+        date = '20190531'  # 日期
+        # country = '美国'  # 国家
         country = '中国'  # 国家
+        # country = '新加坡'  # 国家
         data = {
             'id': _id,
             'name': name,

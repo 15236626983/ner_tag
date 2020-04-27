@@ -1,6 +1,7 @@
 # Compiled class file
 *.class
 /summary
+*.xls
 # Log file
 *.log
 

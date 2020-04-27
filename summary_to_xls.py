@@ -36,34 +36,37 @@ def stats(src,xlx_name):
     # today = datetime.today().strftime('%Y%m%d')
     today='summary'
     for file in paths.list_files(src, validExts=('.anns',)):
-        with open(file, encoding='utf-8') as f:
-            bio_tagged = []
-            for i, line in enumerate(f):
-                tup = line.split()
-                if len(tup) != 2: continue
-                bio_tagged.append(tup)
-            nes = structure_ne(stanford_tree(bio_tagged))
+        try:
+            with open(file, encoding='utf-8') as f:
+                bio_tagged = []
+                for i, line in enumerate(f):
+                    tup = line.split()
+                    if len(tup) != 2: continue
+                    bio_tagged.append(tup)
+                nes = structure_ne(stanford_tree(bio_tagged))
 
-            # 统计每篇文档实体的字典
-            entity_dic = collections.defaultdict(set)
-            for label, entity in nes:
-                entity_dic[label].add(entity)
+                # 统计每篇文档实体的字典
+                entity_dic = collections.defaultdict(set)
+                for label, entity in nes:
+                    entity_dic[label].add(entity)
 
-            dst = os.path.sep.join([today, file.split(os.sep)[-2]])
-            if not os.path.exists(dst):
-                os.makedirs(dst)
+                dst = os.path.sep.join([today, file.split(os.sep)[-2]])
+                if not os.path.exists(dst):
+                    os.makedirs(dst)
 
-            ai_tec.update(entity_dic['ai_tec'])
-            ai_product.update(entity_dic['ai_product'])
-            ai_program.update(entity_dic['ai_program'])
-            Org.update(entity_dic['Org'])
+                ai_tec.update(entity_dic['ai_tec'])
+                ai_product.update(entity_dic['ai_product'])
+                ai_program.update(entity_dic['ai_program'])
+                Org.update(entity_dic['Org'])
 
-            for key, items in entity_dic.items():
-                path = Path(dst, f'{key}.txt')
-                with open(path, 'w', encoding='utf-8') as fd:
-                    for item in sorted(items):
-                        fd.write(item)
-                        fd.write('\n')
+                for key, items in entity_dic.items():
+                    path = Path(dst, f'{key}.txt')
+                    with open(path, 'w', encoding='utf-8') as fd:
+                        for item in sorted(items):
+                            fd.write(item)
+                            fd.write('\n')
+        except Exception:
+            print(file)
 
     with open(today + '/' + 'ai_tec.txt', 'w', encoding='utf-8') as f1:
         for item in sorted(ai_tec):
